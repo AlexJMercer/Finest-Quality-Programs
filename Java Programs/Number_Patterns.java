@@ -1,5 +1,3 @@
-package Class_Practice;
-
 public class Number_Patterns {
     public static void main(String[] args) {
         int rows = 5;
