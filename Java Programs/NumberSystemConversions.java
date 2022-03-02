@@ -1,8 +1,11 @@
 // This idea for this program first popped in my head on 20th February 2022.
+
 // The ultimate purpose of this program will be to convert a number from 
 // any base, within the range 2 to 36 to any other base within that same range.
+
 // The logic for this is the ordinary calculations used in Number Theory to
-// convert numbers to and from different bases, which is usually always under 16 (Hexadecimal)
+// convert numbers to and from different bases, which is usually always under 16 (Hexadecimal).
+
 // I expanded this concept to further include bases upto 36, at which point the largest
 // alphabet we can use is Z.
 
@@ -11,11 +14,32 @@ import java.util.Scanner;
 
 public class NumberSystemConversions {
 
-    public static void baseToDec(long num, byte base) {
+    public static long baseToDec(String num, byte base) {
+        long decimalNum = 0;
+        int[] arr = new int[num.length()];
 
+        for (int i = 0; i < num.length(); i++)                                      // Converting the String to an integer array
+        {
+            if (Character.isAlphabetic(arr[i]))
+            {
+                arr[i] = ((int) Character.getNumericValue(arr[i]))-55;
+            }
+            else
+            {
+                arr[i] = Integer.parseInt(String.valueOf(arr[i]));
+            }
+            
+        }
+
+        for (int i = num.length()-1, j = 0; i >= 0; i--, j++)                        // Start iterating from back of array
+        {
+            decimalNum += (arr[i])*Math.pow(base, j);
+        }
+        System.out.println(decimalNum);
+        return decimalNum;
     }
 
-    public static void divideByBase(long num, byte base) {
+    public static void decimalToBase(long num, byte base) {
 
         ArrayList<String> preOutput = new ArrayList<String>();
 
@@ -84,15 +108,26 @@ public class NumberSystemConversions {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("\nEnter a number (Decimal): ");                           // User input prompt for a decimal number (for now)
-        long inputNum = input.nextLong();
+        System.out.print("\nEnter base of input number (2-36): ");                  // User input prompt for base of input number
+        byte inputBase = input.nextByte();
+
+        System.out.print("\nEnter your number to be converted : ");
+        String inputStr = input.next();
 
         System.out.print("\nSelect the base you want to convert to (2-36): ");      // Prompt to convert to a certain base, only supports till 36
         byte choice = input.nextByte();
 
-        switch ((choice >= 2 && choice <= 36) ? 1:2) {                              // Temporary Switch-Case statement
+        switch ((inputBase == 10) ? 2 : (choice == 10) ? 3 : 1)
+        {
             case 1:
-                divideByBase(inputNum, choice);
+                decimalToBase(baseToDec(inputStr, inputBase), choice);              // Any base to any other
+                break;
+            case 2:
+                long inputNum = Long.parseLong(inputStr);
+                decimalToBase(inputNum, choice);                                    // From Base 10 to other
+                break;
+            case 3:
+                baseToDec(inputStr, inputBase);                                     // From different bases to Base 10
                 break;
             default:
                 System.out.println("Invalid Base.");
