@@ -23,7 +23,7 @@ public class NumberSystemConversions {
             
             if (Character.isAlphabetic(num.charAt(i)))
             {
-                arr[i] = ((int) num.charAt(i))-55;
+                arr[i] = ((int) num.charAt(i)) - 55;
             }
             else
             {
@@ -129,7 +129,7 @@ public class NumberSystemConversions {
                 break;
             case 3:
                 System.out.println("\nThe Number "+ inputStr +" in Decimal is : "
-                                + baseToDec(inputStr, inputBase)+"\n");                  // From different bases to Base 10
+                                + baseToDec(inputStr, inputBase)+"\n");             // From different bases to Base 10
                 break;
             default:
                 System.out.println("Invalid Base.");
