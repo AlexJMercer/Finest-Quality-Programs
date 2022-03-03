@@ -20,13 +20,14 @@ public class NumberSystemConversions {
 
         for (int i = 0; i < num.length(); i++)                                      // Converting the String to an integer array
         {
-            if (Character.isAlphabetic(arr[i]))
+            
+            if (Character.isAlphabetic(num.charAt(i)))
             {
-                arr[i] = ((int) Character.getNumericValue(arr[i]))-55;
+                arr[i] = ((int) num.charAt(i))-55;
             }
             else
             {
-                arr[i] = Integer.parseInt(String.valueOf(arr[i]));
+                arr[i] = (int) num.charAt(i) - '0';
             }
             
         }
@@ -35,7 +36,7 @@ public class NumberSystemConversions {
         {
             decimalNum += (arr[i])*Math.pow(base, j);
         }
-        System.out.println(decimalNum);
+
         return decimalNum;
     }
 
@@ -127,7 +128,8 @@ public class NumberSystemConversions {
                 decimalToBase(inputNum, choice);                                    // From Base 10 to other
                 break;
             case 3:
-                baseToDec(inputStr, inputBase);                                     // From different bases to Base 10
+                System.out.println("\nThe Number "+ inputStr +" in Decimal is : "
+                                + baseToDec(inputStr, inputBase));                  // From different bases to Base 10
                 break;
             default:
                 System.out.println("Invalid Base.");
